@@ -12,7 +12,7 @@ const Input = (props)=>{
         onChangeText={props.onChangeText}
         value={props.value}
         placeholder={props.placeholder}
-        style={{ height: 20, width: 100 }}
+        style={{ height: 20, width: 250 }}
       />
     </View>
   )

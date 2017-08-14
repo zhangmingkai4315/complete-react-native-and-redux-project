@@ -11,6 +11,7 @@ import {
 import LoginForm from './components/LoginForm'
 
 class App extends React.Component{
+  state = {loggedIn:false,user:null}
   componentWillMount(){
     var config = {
       apiKey: "AIzaSyCnmYIWx-3sCFaAs37QfjgrblqUmcEptwQ",
@@ -22,13 +23,32 @@ class App extends React.Component{
     };
 
     firebase.initializeApp(config);
-
+    firebase.auth().onAuthStateChanged((user)=>{
+      if (user){
+        this.setState({loggedIn:true,user:user})
+      }else{
+        this.setState({ loggedIn:false,user:null})
+      }
+    });
+  }
+  renderContent(){
+    if(this.state.loggedIn){
+      return (
+      <Card>
+        <CardSection>
+            <Button onPress={()=>{firebase.auth().signOut()}} buttonTitle="登出系统"/>
+        </CardSection>
+      </Card>
+      )
+    }else{
+      return <LoginForm/>
+    }
   }
   render(){
     return(
       <View>
-        <Header headerText='登入页面'/>
-        <LoginForm/>
+        <Header headerText='Auth系统'/>
+        {this.renderContent()}
       </View>
     )
   }
