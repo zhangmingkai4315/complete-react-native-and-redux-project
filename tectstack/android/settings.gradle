@@ -1,0 +1,3 @@
+rootProject.name = 'tectstack'
+
+include ':app'
