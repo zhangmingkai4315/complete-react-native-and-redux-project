@@ -1,6 +1,6 @@
-export const selectLibray =(id) =>{
+export const selectLibray = (id) =>{
   return {
     type:"SELECT_LIBRARY",
     payload:id
   }
-}
+} 

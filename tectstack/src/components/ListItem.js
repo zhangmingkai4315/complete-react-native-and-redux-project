@@ -1,12 +1,32 @@
 import React, { Component, PropTypes } from 'react'
 import { Card,CardSection,Spinner } from './common'
-import {Text,View} from 'react-native'
+import {connect} from 'react-redux'
+import {Text,View,TouchableWithoutFeedback} from 'react-native'
+import * as actions from '../actions'
+
 class ListItem extends Component {
+  renderDescription(){
+    console.log(this.props.item.id, this.props.selection)
+    if (this.props.item.id === this.props.selection){
+      return (
+        <Text>{this.props.item.description}</Text>
+      )
+    }
+  }
   render () {
+    const {id,title} = this.props.item;
     return (
-      <CardSection>
-        <Text style={styles.titleStyle}>{this.props.item.title}</Text>
-      </CardSection>
+      <TouchableWithoutFeedback onPress={() => this.props.selectLibray(id)}>
+        <View>
+          <CardSection>
+            <Text style={styles.titleStyle}>
+              {title}
+            </Text>
+            
+          </CardSection>
+          {this.renderDescription()}
+        </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
@@ -17,4 +37,10 @@ const styles = {
     paddingLeft:15
   }
 }
-export default ListItem
+
+const mapStateToProps = state => {
+  return {
+    selection: state.selection
+  }
+}
+export default connect(mapStateToProps,actions)(ListItem)
