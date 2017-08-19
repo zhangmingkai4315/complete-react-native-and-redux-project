@@ -1,15 +1,21 @@
 import React, { Component, PropTypes } from 'react'
 import { Card,CardSection,Spinner } from './common'
 import {connect} from 'react-redux'
-import {Text,View,TouchableWithoutFeedback} from 'react-native'
+import {Text,View,TouchableWithoutFeedback,LayoutAnimation} from 'react-native'
 import * as actions from '../actions'
 
 class ListItem extends Component {
+  componentWillUpdate(){
+    LayoutAnimation.spring();
+  }
   renderDescription(){
-    console.log(this.props.item.id, this.props.selection)
-    if (this.props.item.id === this.props.selection){
+    if (this.props.expanded){
       return (
-        <Text>{this.props.item.description}</Text>
+        <CardSection>
+          <Text style={{flex:1,padding:10}}>
+            {this.props.item.description}
+          </Text>
+        </CardSection>
       )
     }
   }
@@ -22,7 +28,6 @@ class ListItem extends Component {
             <Text style={styles.titleStyle}>
               {title}
             </Text>
-            
           </CardSection>
           {this.renderDescription()}
         </View>
@@ -38,9 +43,10 @@ const styles = {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps =(state,ownProps) => {
+  const expanded = state.selection === ownProps.item.id
   return {
-    selection: state.selection
+    expanded
   }
 }
 export default connect(mapStateToProps,actions)(ListItem)
