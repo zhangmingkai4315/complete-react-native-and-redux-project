@@ -5,8 +5,8 @@ import { createStore,applyMiddleware } from 'redux'
 import firebase from 'firebase'
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers'
-import {Header} from './components/common'
-import LoginForm from './components/LoginForm'
+import Router from './Router'
+
 class App extends Component {
   componentWillMount(){
     var config = {
@@ -23,9 +23,8 @@ class App extends Component {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return (
       <Provider store={store}>
-        <View>
-          <Header headerText = "登入页面"/>
-          <LoginForm/>
+        <View style={{flex:1}}>
+          <Router/>
         </View>
       </Provider>
     )
