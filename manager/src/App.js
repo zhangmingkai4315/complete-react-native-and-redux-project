@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View ,Text} from 'react-native'
 import { Provider ,connect } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore,applyMiddleware } from 'redux'
 import firebase from 'firebase'
-
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers'
-
-
-
-
+import {Header} from './components/common'
+import LoginForm from './components/LoginForm'
 class App extends Component {
   componentWillMount(){
     var config = {
@@ -22,10 +20,12 @@ class App extends Component {
     firebase.initializeApp(config);
   }
   render () {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <View>
-          <Text>Hello</Text>
+          <Header headerText = "登入页面"/>
+          <LoginForm/>
         </View>
       </Provider>
     )

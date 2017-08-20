@@ -4,11 +4,10 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   AppRegistry
-} from 'react-native'
+} from 'react-native';
 
 import App from './src/App'
-
 AppRegistry.registerComponent('manager', () => App);
