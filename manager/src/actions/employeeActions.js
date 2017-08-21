@@ -29,6 +29,7 @@ const fetchEmployeesSuccess = (data) => {
 export const employeeCreate = ({username,phone,shift}) =>{
   return (dispatch)=>{
     const {currentUser} =firebase.auth()
+    console.log(currentUser.uid)
     if(!currentUser || !currentUser.uid){
       Actions.auth()
       return
@@ -45,15 +46,13 @@ export const employeeCreate = ({username,phone,shift}) =>{
 }
 
 export const employeeFetch =()=> {
-  const { currentUser } = firebase.auth()
-  if (!currentUser || !currentUser.uid) {
-    Actions.auth()
-    return
-  }
-  return (dispatch)=>{
-    firebase.database().ref(`/users/${currentUser.uid}/employees`)
-            .on('value',snapshot=>{
-               dispatch(fetchEmployeesSuccess(snapshot.val()))
-            })
-  }
+  const { currentUser } = firebase.auth();
+  console.log(currentUser)
+  return (dispatch) => {
+    firebase.database().ref(`/user/${currentUser.uid}/employees`)
+      .on('value', snapshot => {
+        console.log(snapshot)
+        dispatch(fetchEmployeesSuccess(snapshot.val()));
+      });
+  };
 }

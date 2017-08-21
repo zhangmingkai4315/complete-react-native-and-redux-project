@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View ,Text} from 'react-native'
 import { Provider ,connect } from 'react-redux'
 import { createStore,applyMiddleware } from 'redux'
