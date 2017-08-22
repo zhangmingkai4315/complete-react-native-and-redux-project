@@ -44,6 +44,47 @@ export const employeeCreate = ({username,phone,shift}) =>{
         .catch(() => dispatch(createEmployeeFailure()))
   }
 }
+function employEditSuccess(){
+  return {
+    type: Types.EMPLOYEE_EDIT_SUCCESS
+  }
+}
+export const employeeEdit = ({ username, phone, shift,uid}) => {
+  return (dispatch) => {
+    const { currentUser } = firebase.auth()
+    console.log(currentUser.uid)
+    if (!currentUser || !currentUser.uid) {
+      Actions.auth()
+      return
+    }
+    firebase.database()
+      .ref(`/user/${currentUser.uid}/employees/${uid}`)
+      .set({ username, phone, shift })
+      .then(() => {
+        dispatch(employEditSuccess())
+        Actions.employeelist({ type: 'reset' })
+      })
+      .catch(() => dispatch(createEmployeeFailure()))
+  }
+}
+
+export const employeeDelete = ({ uid }) => {
+  return (dispatch) => {
+    const { currentUser } = firebase.auth()
+    console.log(currentUser.uid)
+    if (!currentUser || !currentUser.uid) {
+      Actions.auth()
+      return
+    }
+    firebase.database()
+      .ref(`/user/${currentUser.uid}/employees/${uid}`)
+      .remove()
+      .then(() => {
+        Actions.employeelist({ type: 'reset' })
+      })
+      .catch(() => dispatch(createEmployeeFailure()))
+  }
+}
 
 export const employeeFetch =()=> {
   const { currentUser } = firebase.auth();

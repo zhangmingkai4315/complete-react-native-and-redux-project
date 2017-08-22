@@ -1,5 +1,5 @@
 import {
-  FETCH_EMPLOYEES_SUCCESS
+  FETCH_EMPLOYEES_SUCCESS,
 } from '../Types';
 
 const INITIAL_STATE = {}
