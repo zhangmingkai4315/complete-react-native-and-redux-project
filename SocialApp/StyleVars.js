@@ -10,6 +10,6 @@ export default {
   },
   Fonts:{
     logo:"Arial",
-    gerneral:"Helvetica Neus"
+    gerneral:"Helvetica Neue"
   }
 }

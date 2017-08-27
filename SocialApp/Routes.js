@@ -1,5 +1,6 @@
 import Home from './Views/Screens/Home';
-
+import LogoutButton from './Views/LogoutButton';
+import PostButton from './Views/PostButton';
 class Routes{
   get(route,args){
     if("undefined"==typeof this[route]){
@@ -14,8 +15,8 @@ class Routes{
       name:'Home',
       title:"Socail",
       component:Home,
-      leftButton:null,
-      rightButton:null,
+      leftButton: LogoutButton,
+      rightButton: PostButton,
       hideNavigationBar:false,
       statusBarStyle:'light-content'
     }
