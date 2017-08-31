@@ -1,4 +1,5 @@
 import Home from './Views/Screens/Home';
+import Login from './Views/Screens/Login';
 import LogoutButton from './Views/LogoutButton';
 import PostButton from './Views/PostButton';
 class Routes{
@@ -21,6 +22,18 @@ class Routes{
       statusBarStyle:'light-content'
     }
   }
+  login() {
+    return {
+      name: 'login',
+      title: "Login",
+      component: Login,
+      leftButton: null,
+      rightButton: null,
+      hideNavigationBar: true,
+      statusBarStyle: 'light-content'
+    }
+  }
+
 }
 
 export default new Routes()

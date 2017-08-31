@@ -7,7 +7,10 @@ import {
 import SharedStyles from '../../SharedStyles';
 import StyleVars from '../../StyleVars';
 import Button from '../Button';
+import Routes from '../../Routes'
 import LoadingView from '../LoadingView';
+import Actions from '../../Actions';
+
 const styles = StyleSheet.create({
   buttonContainer:{
     paddingTop:96,
@@ -30,6 +33,21 @@ class Home extends Component {
       failed:true
     }
   }
+  componentWillMount(){
+    Actions.auth()
+  }
+  componentDidMount() {
+    Actions.loadUser.completed.listen(this._onLoadUserCompleted.bind(this))
+    Actions.logout.listen(this._onLogout.bind(this))
+  }
+
+  _onLoadUserCompleted(){
+
+  }
+  _onLogout(){
+    this.props.replaceRoute(Routes.login());
+  }
+
   _retryFetch(){
 
   }
